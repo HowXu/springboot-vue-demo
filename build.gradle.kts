@@ -32,5 +32,5 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
 
     // sql查询结果直接转换为类
-    implementation("org.babyfish.jimmer:jimmer-sql:0.9.73")
+    // implementation("org.babyfish.jimmer:jimmer-sql:0.9.73") 这个版本babyfish会有bug 直接用上面插件自带的
 }
