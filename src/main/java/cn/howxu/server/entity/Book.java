@@ -23,9 +23,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "books")
 public interface Book {
+    // 我的数据库里这个表的ID 是默认自增的 所以要在这里声明一下它的自动生成策略
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // 我的数据库里这个表的ID 是默认自增的 所以要在这里声明一下它的自动生成策略
     int id();
     // 这三个值对应数据表中索引的三个名称 请务必带上字段注解 默认注解包给你刚炸烂
     @Column(name = "book_name")

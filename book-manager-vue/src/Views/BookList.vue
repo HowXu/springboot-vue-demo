@@ -8,7 +8,7 @@ interface Book {
   id: number;
   name: string;
   author: string;
-  registe_time: string;
+  time: string;
 }
 
 // 然后是动态渲染展现的数据表的组件
@@ -22,7 +22,7 @@ interface Book {
  * 
  */
 const columns: DataTableColumns<Book> = [
-  // 这个上下对应应该很明显了
+  // 这个上下对应应该很明显了 这里也是要对应后端函数命名的
   {
     title: "ID",
     key: "id",
@@ -33,11 +33,11 @@ const columns: DataTableColumns<Book> = [
   },
   {
     title: "Author",
-    key: "string",
+    key: "author",
   },
   {
     title: "Registe Time",
-    key: "registe_time",
+    key: "time",
   },
 ];
 
@@ -70,8 +70,7 @@ const books = ref<Book[]>([]);
         由于 books 是用 ref 创建的，必须通过 .value 修改其值
     fetch默认get post要改 后面会用到的
  * 
- * 
- * 
+  js系列的话 lambda表达式要有返回值的
  */
 fetch("http://localhost:8080/book")
   .then((response) => response.json())
@@ -86,6 +85,5 @@ fetch("http://localhost:8080/book")
 
     这个:类似于v-model操作
     -->
-    <NDataTable :column="columns" :data="books"></NDataTable>
-
+    <NDataTable :columns="columns" :data="books" />
 </template>

@@ -2,9 +2,14 @@
 <!-- 主界面 -->
 
 <script setup lang="ts">
+import { NMessageProvider } from 'naive-ui';
+
 
 </script>
 
 <template>
-    <h1>SpringBoot + Vue + Mysql</h1>
+    <!-- 因为使用了NMessage类 所以要NMessageProvider先决 RouteView让main.ts的app来进行App.vue这个主页面的管理-->
+    <NMessageProvider>
+        <RouterView />
+    </NMessageProvider>
 </template>

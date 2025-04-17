@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { type FormInst, useMessage } from 'naive-ui';
+import { type FormInst, NButton, NForm, NFormItem, NInput, useMessage } from 'naive-ui';
 import { ref } from 'vue';
 
 // 依然是一个book类 方便进行json格式化之类的
 // id是自增的 time可以拿函数获取
 // 带问号是一个可选属性 如果存在，它的值必须是 string 类型 如果不存在，它的值会是 undefined
 interface BookInput{
-    title?:string;
+    // 这里的名字要和后端函数名对接的
+    name?:string;
     author?:string;
 }
 /**
@@ -38,12 +39,13 @@ function save(){
                         "Content-Type":"application/json",
                     },
                     // 这里把body设置为格式化的BookIn Json的字符串
+                    // 注意你的数据库的time字段应该是自动填充now的 不然你应该拷贝一个BookIn然后设置它的时间戳
                     body: JSON.stringify(bookIn.value)
                 }
             ).then(
                 _ => {
                     // 成功了发个信息
-                    message.success("Save book goooooooooood")
+                    message.success("Save book successfully")
                 }
             )
         }else{
@@ -55,5 +57,32 @@ function save(){
 </script>
 
 <template>
-    TODO 添加存储的表单
+    <!--
+    ref="formInput" 给这个表单组件注册了一个引用标识，可以在 JavaScript 中通过 this.$refs.formInput 来访问这个表单实例
+    :model="bookIn" 是 v-bind:model 的简写，将表单数据模型绑定到 bookIn 这个变量上
+    -->
+    <NForm ref="formInput" :model="bookIn">
+        <!--接下来添加表单的两个选项-->
+        <!--
+        label="书名/标题"
+        显示在表单项前的标签文本
+        path="name"
+        指定该表单项关联的数据字段名（对应 form 的 model 中的 name 属性） 这个表单被收集上去的时候会被定为name(特别为了validate这个期约的时候用) 
+        同时也双向绑定了bookIn的name 让它不一定是在validate的期约里你才能访问的到
+        :rule（核心验证规则）
+        接收一个数组形式的验证规则
+        -->
+        <NFormItem label="书名/标题" path="name" :rule="[{required: true, message: '请输入书名'}]">
+            <NInput v-model:value="bookIn.name"/>
+        </NFormItem>
+
+        <NFormItem label="作者" path="author" :rule="[{required: true, message: '请输入作者名称'}]">
+            <NInput v-model:value="bookIn.author"/>
+        </NFormItem>
+        
+        <!--
+        @click = v-on:click 是监听事件
+        -->
+        <NButton type="primary" @click="save">提交</NButton>
+    </NForm>
 </template>

@@ -49,6 +49,6 @@ public class BookController {
     @PostMapping("/book")
     public void registeBook(@RequestBody Book book){
         // save已经过时 这个sql语句可以直接保存类到数据库里 非常的omz
-        sqlClient.saveCommand(book);
+        sqlClient.insert(book);
     }
 }
