@@ -14,7 +14,7 @@ push to github for archive
 
 # 截图(naive-ui立大功)
 
-[main](./scst/3.png)
-[](./scst/1.png)
-[](./scst/2.png)
+![main](./scst/3.png)
+![](./scst/1.png)
+![](./scst/2.png)
 
